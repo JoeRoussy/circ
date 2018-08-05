@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Icon, Button, Input, Message, Grid, Image } from 'semantic-ui-react';
-import { LabelInputField, UploadField, Upload } from 'react-semantic-redux-form';
+import { InputField, UploadField, Upload } from 'react-semantic-redux-form';
 
 import FileInput from '../FileInput';
 
@@ -74,7 +74,7 @@ const ProfileForm = ({
                 />
                 <Field
                     name='name'
-                    component={LabelInputField}
+                    component={InputField}
                     label={{ content: <Icon color='blue' name='user' size='large' /> }}
                     labelPosition='left'
                     placeholder='Name'
