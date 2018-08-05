@@ -1,5 +1,5 @@
 #footerParent {
-    padding: 125px 0px;
+    padding: 75px 0px;
 }
 
 #footerParent .besideIcon {
@@ -22,7 +22,7 @@
 
 #footerLogo {
     margin: 0 auto;
-    max-height: 80px;
+    max-height: 200px;
 }
 
 #footerContactSection .row {
