@@ -69,7 +69,7 @@ class Home extends Component {
                     <div id='heroOverlay'>
                     </div>
                     <Container id='homeSearchWrapper'>
-                        <h1 id='homeHeading'>Circ</h1>
+                        <h1 id='homeHeading'>Connecting Indigenous Resources Canada</h1>
                     </Container>
                 </div>
             </div>

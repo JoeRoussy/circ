@@ -8,7 +8,7 @@ import './styles.css';
 const Footer = () => (
     <Container>
         <div id='footerParent'>
-            <Grid centered stackable columns={2} verticalAlign={'middle'}>
+            <Grid centered stackable columns={2} verticalAlign='middle'>
                 <Grid.Column textAlign='center'>
                     <div>
                         <Image id='footerLogo' src='/images/logo-white.svg'/>
