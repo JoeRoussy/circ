@@ -4,10 +4,17 @@ import { Form, Icon, Button, Message } from 'semantic-ui-react';
 import { InputField, UploadField } from 'react-semantic-redux-form';
 
 import FileInput from '../FileInput';
+import constants from '../../../../common/constants';
 
 import './styles.css';
 
 import { isEmail, isPassword, isText } from '../../../../common/validation';
+
+const {
+    USER_TYPES: {
+        ORGANISATION: ORGANISATION_TYPE
+    }
+} = constants;
 
 const validate = (values) => {
     let errors = {};
@@ -67,9 +74,11 @@ const SignUpForm = ({
     isProcessing,
     valid,
     errorMessage,
-    className
+    className,
+    userType
 }) => (
     <Form className={className} onSubmit={onSubmit} error={!!errorMessage}>
+        {userType === ORGANISATION_TYPE ? 'TODO... orgnaisation specific sign up fields' : ''}
         <Message
             error
             header='Error'
