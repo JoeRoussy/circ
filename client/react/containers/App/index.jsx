@@ -14,6 +14,7 @@ import ForgotPassword from '../ForgotPassword';
 import ForgotPasswordForm from '../ForgotPasswordForm';
 import Footer from '../../components/Footer'
 import './styles.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = ({
 
