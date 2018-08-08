@@ -1,13 +1,20 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Icon, Button, Message } from 'semantic-ui-react';
-import { LabelInputField, UploadField } from 'react-semantic-redux-form';
+import { InputField, UploadField } from 'react-semantic-redux-form';
 
 import FileInput from '../FileInput';
+import constants from '../../../../common/constants';
 
 import './styles.css';
 
 import { isEmail, isPassword, isText } from '../../../../common/validation';
+
+const {
+    USER_TYPES: {
+        ORGANISATION: ORGANISATION_TYPE
+    }
+} = constants;
 
 const validate = (values) => {
     let errors = {};
@@ -67,9 +74,11 @@ const SignUpForm = ({
     isProcessing,
     valid,
     errorMessage,
-    className
+    className,
+    userType
 }) => (
     <Form className={className} onSubmit={onSubmit} error={!!errorMessage}>
+        {userType === ORGANISATION_TYPE ? 'TODO... orgnaisation specific sign up fields' : ''}
         <Message
             error
             header='Error'
@@ -77,28 +86,28 @@ const SignUpForm = ({
         />
         <Field
             name='name'
-            component={LabelInputField}
+            component={InputField}
             label='Name'
             labelPosition='left'
             placeholder='Name'
         />
         <Field
             name='email'
-            component={LabelInputField}
+            component={InputField}
             label='Email'
             labelPosition='left'
             placeholder='Email'
         />
         <Field
             name='confirmEmail'
-            component={LabelInputField}
+            component={InputField}
             label='Confirm Email'
             labelPosition='left'
             placeholder='Confirm Email'
         />
         <Field
             name='password'
-            component={LabelInputField}
+            component={InputField}
             label='Password'
             labelPosition='left'
             placeholder='Password'
@@ -106,7 +115,7 @@ const SignUpForm = ({
         />
         <Field
             name='confirmPassword'
-            component={LabelInputField}
+            component={InputField}
             label='Confirm Password'
             labelPosition='left'
             placeholder='Confirm Password'

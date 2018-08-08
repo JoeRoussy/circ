@@ -44,7 +44,7 @@ const NavBar = ({
     return (
         <Menu fixed='top'>
             <Container>
-                <Menu.Item header onClick={() => navigateTo('/')}><Image src='/images/logo.svg' size='small' /></Menu.Item>
+                <Menu.Item id='navLogo' header onClick={() => navigateTo('/')}><Image src='/images/logo.svg' size='small' /></Menu.Item>
                 <Menu.Menu position='right'>
                     {rightSection}
                 </Menu.Menu>

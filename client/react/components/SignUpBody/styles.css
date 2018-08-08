@@ -2,6 +2,12 @@
     text-align: right;
 }
 
+#signupFormWrapper .infoText {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
 .signUpForm {
     margin-top: 15px;
 }
@@ -9,15 +15,4 @@
 #signUpBody {
     width: 80%;
     margin: 30px auto 0;
-}
-
-#signUpBody .ui.two.buttons .primaryColourAlt {
-    border: 1px solid #60b0f4;
-    color: #60b0f4;
-    background-color: white;
-}
-
-
-#signUpBody .ui.two.buttons .primaryColourAlt:hover {
-    background-color: rgba(0, 0, 0, 0.05);
 }

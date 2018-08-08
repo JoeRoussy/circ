@@ -1,14 +1,21 @@
 import moment from 'moment';
-import axios from 'axios';
 
 import {
     required,
     print,
     convertToObjectId,
-    RethrownError
+    RethrownError,
+    getUniqueHash
 } from '../custom-utils';
 import { insert as insertInDb, findAndUpdate } from '../db/service';
 import { generateHash as hashPassword } from '../authentication';
+import constants from '../../../common/constants';
+
+const {
+    VERIFICATION_TYPES: {
+        EMAIL: EMAIL_VERIFICATION_TYPE
+    } = {}
+} = constants;
 
 export const getUserByEmail = async({
     usersCollection = required('usersCollection'),
@@ -86,7 +93,6 @@ export const getEmailConfirmationLink = async({
 
     const {
         ROOT_URL = required('ROOT_URL'),
-        VERIFICATION_TYPES_EMAIL = required('VERIFICATION_TYPES_EMAIL')
     } = process.env;
 
     const urlIdentifyer = await getUniqueHash(user);
@@ -99,7 +105,7 @@ export const getEmailConfirmationLink = async({
                 urlIdentifyer,
                 userId,
                 isCompeted: false,
-                type: VERIFICATION_TYPES_EMAIL
+                type: EMAIL_VERIFICATION_TYPE
             }
         })
     } catch (e) {

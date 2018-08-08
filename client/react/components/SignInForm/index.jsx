@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Icon, Button, Input, Message } from 'semantic-ui-react';
-import { LabelInputField } from 'react-semantic-redux-form';
+import { InputField } from 'react-semantic-redux-form';
 
 import { isEmail, isPassword } from '../../../../common/validation';
 
@@ -48,7 +48,7 @@ const SignInForm = ({
         />
         <Field
             name='email'
-            component={LabelInputField}
+            component={InputField}
             label='Email'
             labelPosition='left'
             placeholder='Email'
@@ -56,7 +56,7 @@ const SignInForm = ({
         <Field
             name='password'
             type='password'
-            component={LabelInputField}
+            component={InputField}
             label='Password'
             labelPosition='left'
             placeholder='Password'

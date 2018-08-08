@@ -5,6 +5,17 @@ import marked from 'marked';
 import moment from 'moment';
 
 import { required, RethrownError } from '../custom-utils';
+import constants from '../../../common/constants';
+
+const {
+    EMAIL: {
+        TEMPLATE_EXTENSION,
+        TEMPLATE_PATH,
+        TEMPLATE_LAYOUT_PATH,
+        DEFAULT_LAYOUT,
+        TEMPLATE_PARTIALS
+    } = {}
+} = constants;
 
 // Helpers for handlebars templating
 const _helpers = {
@@ -43,12 +54,7 @@ const _sendMessage = async({
     const {
         ROOT_URL = required('ROOT_URL'),
         EMAIL_ADDRESS = required('EMAIL_ADDRESS'),
-        EMAIL_PASSWORD = required('EMAIL_PASSWORD'),
-        EMAIL_TEMPLATE_EXTENSION = required('EMAIL_TEMPLATE_EXTENSION'),
-        EMAIL_TEMPLATE_LAYOUT_PATH = required('EMAIL_TEMPLATE_LAYOUT_PATH'),
-        EMAIL_DEFAULT_LAYOUT = required('EMAIL_DEFAULT_LAYOUT'),
-        EMAIL_TEMPLATE_PARTIALS = required('EMAIL_TEMPLATE_PARTIALS'),
-        EMAIL_TEMPLATE_PATH = required('EMAIL_TEMPLATE_PATH')
+        EMAIL_PASSWORD = required('EMAIL_PASSWORD')
     } = process.env;
 
     const {
@@ -69,14 +75,14 @@ const _sendMessage = async({
         // This is a templated email
         transporter.use('compile', nodemailerHandlebars({
             viewEngine: {
-                extname: EMAIL_TEMPLATE_EXTENSION,
-                layoutsDir: EMAIL_TEMPLATE_LAYOUT_PATH,
-                defaultLayout: EMAIL_DEFAULT_LAYOUT,
-                partialsDir: EMAIL_TEMPLATE_PARTIALS,
+                extname: TEMPLATE_EXTENSION,
+                layoutsDir: TEMPLATE_LAYOUT_PATH,
+                defaultLayout: DEFAULT_LAYOUT,
+                partialsDir: TEMPLATE_PARTIALS,
                 helpers: _helpers
             },
-            viewPath: EMAIL_TEMPLATE_PATH,
-            extName: EMAIL_TEMPLATE_EXTENSION
+            viewPath: TEMPLATE_PATH,
+            extName: TEMPLATE_EXTENSION
         }));
 
         transporter.use('compile', inlineCss());

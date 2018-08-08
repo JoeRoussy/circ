@@ -21,6 +21,23 @@ import {
     deleteById
 } from '../components/db/service';
 
+import constants from '../../common/constants';
+
+const {
+    USER_TYPES: {
+        CLIENT: CLIENT_TYPE,
+        ORGANISATION: ORGANISATION_TYPE
+    },
+    ERRORS: {
+        SIGN_UP: {
+            EXISTING_EMAIL: EXISTING_EMAIL_ERROR,
+            GENERIC: GENERIC_SIGN_UP_ERROR,
+            MISSING_VALUES: MISSING_VALUES_SIGN_UP_ERROR,
+            INVALID_VALUES: INVALID_VALUES_SIGN_UP_ERROR
+        }
+    }
+} = constants;
+
 
 
 export const userSearch = ({
@@ -88,12 +105,6 @@ export const createUser = ({
     } = req;
 
     const {
-        USER_TYPE_TENANT,
-        USER_TYPE_LANDLORD,
-        SIGNUP_ERRORS_EXISTING_EMAIL,
-        SIGNUP_ERRORS_GENERIC,
-        SIGNUP_ERRORS_MISSING_VALUES,
-        SIGNUP_ERRORS_INVALID_VALUES,
         UPLOADS_RELATIVE_PATH,
         DEFAULT_PROFILE_PICTURE_RELATIVE_PATH,
         JWT_SECRET
@@ -115,16 +126,16 @@ export const createUser = ({
             res,
             status: 400,
             message: 'Creating a user requires a name, an email, a password, and a user type',
-            errorKey: SIGNUP_ERRORS_MISSING_VALUES
+            errorKey: MISSING_VALUES_SIGN_UP_ERROR
         });
     }
 
-    if (!(userType === USER_TYPE_TENANT || userType === USER_TYPE_LANDLORD)) {
+    if (!(userType === CLIENT_TYPE || userType === ORGANISATION_TYPE)) {
         return sendError({
             res,
             status: 400,
-            message: `userType must be either \"${USER_TYPE_TENANT}\" or \"${USER_TYPE_LANDLORD}\"`,
-            errorKey: SIGNUP_ERRORS_INVALID_VALUES
+            message: `userType must be either "${CLIENT_TYPE}" or "${ORGANISATION_TYPE}"`,
+            errorKey: INVALID_VALUES_SIGN_UP_ERROR
         });
     }
 
@@ -142,7 +153,7 @@ export const createUser = ({
             res,
             status: 500,
             message: 'Could not sign up',
-            errorKey: SIGNUP_ERRORS_GENERIC
+            errorKey: GENERIC_SIGN_UP_ERROR
         });
     }
 
@@ -153,7 +164,7 @@ export const createUser = ({
             res,
             status: 400,
             message: `A user with email: ${email} already exists`,
-            errorKey: SIGNUP_ERRORS_EXISTING_EMAIL
+            errorKey: EXISTING_EMAIL_ERROR
         });
     }
 
@@ -182,7 +193,7 @@ export const createUser = ({
             res,
             status: 500,
             message: 'Could not sign up',
-            errorKey: SIGNUP_ERRORS_GENERIC
+            errorKey: GENERIC_SIGN_UP_ERROR
         });
     }
 
@@ -209,7 +220,7 @@ export const createUser = ({
             res,
             status: 500,
             message: 'Could not sign up',
-            errorKey: SIGNUP_ERRORS_GENERIC
+            errorKey: GENERIC_SIGN_UP_ERROR
         });
     }
 
@@ -235,7 +246,7 @@ export const createUser = ({
             res,
             status: 500,
             message: 'Could not sign up',
-            errorKey: SIGNUP_ERRORS_GENERIC
+            errorKey: GENERIC_SIGN_UP_ERROR
         });
     }
 

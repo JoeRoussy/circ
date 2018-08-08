@@ -1,8 +1,19 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
+import constants from '../../../common/constants';
 
 const config = {
 
 };
+
+const {
+    ERRORS: {
+        SIGN_UP: {
+            EXISTING_EMAIL: EXISTING_EMAIL_ERROR,
+            GENERIC: GENERIC_EMAIL_ERROR,
+            MISSING_VALUES: MISSING_VALUES_ERROR
+        } = {}
+    } = {}
+} = constants;
 
 const signUpReducer = (state = config, actions) => {
     const {
@@ -54,9 +65,9 @@ const signUpReducer = (state = config, actions) => {
             if (errorKey) {
                 // We got an error key back so use an error message that relates to it
                 const errorMessages = {
-                    [process.env.SIGNUP_ERRORS_EXISTING_EMAIL]: 'A user with that email already exists',
-                    [process.env.SIGNUP_ERRORS_GENERIC]: 'Your request could not be processed',
-                    [process.env.SIGNUP_ERRORS_MISSING_VALUES]: 'Please ensure you have filled all the fields in the form'
+                    [EXISTING_EMAIL_ERROR]: 'A user with that email already exists',
+                    [GENERIC_EMAIL_ERROR]: 'Your request could not be processed',
+                    [MISSING_VALUES_ERROR]: 'Please ensure you have filled all the fields in the form'
                 };
 
                 errorMessage = errorMessages[errorKey];

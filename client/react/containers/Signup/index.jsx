@@ -31,7 +31,7 @@ const Signup = ({
                 isFormProcessing={isFormProcessing}
                 errorMessage={errorMessage}
             />
-    </Container  >
+        </Container>
     );
 };
 

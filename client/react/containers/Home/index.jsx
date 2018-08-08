@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Container, Dimmer, Loader, Card, Label, Image } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import moment from 'moment';
 import queryString from 'query-string';
 import { Redirect } from 'react-router';
 import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
-
-import { navigateTo } from '../../../components';
 
 import { setPasswordResetToken } from '../../../redux/actions/forgotPasswordFormActions';
 import { setCurrentUser} from '../../../redux/actions/userActions';
@@ -28,11 +24,7 @@ class Home extends Component {
         this.onPasswordResetToken = this.onPasswordResetToken.bind(this);
     }
 
-    componentWillMount() {
-        const {
-            user
-        } = this.props;
-
+    componentDidMount() {
         const queryParams = queryString.parse(this.props.location.search);
 
         if (queryParams.newToken) {
@@ -41,10 +33,6 @@ class Home extends Component {
             setJwt(queryParams.newToken);
             this.props.dispatch(setCurrentUser(currentUser));
             toast.success('Your email has been confirmed!');
-        }
-
-        if (user) {
-            this.props.dispatch(getRoommateSuggestionsForUser(user));
         }
     }
 
@@ -69,7 +57,7 @@ class Home extends Component {
                     <div id='heroOverlay'>
                     </div>
                     <Container id='homeSearchWrapper'>
-                        <h1 id='homeHeading'>Circ</h1>
+                        <h1 id='homeHeading'>Connecting Indigenous Resources Canada</h1>
                     </Container>
                 </div>
             </div>

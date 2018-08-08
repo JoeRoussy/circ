@@ -1,8 +1,14 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
+
+import constants from '../../../../common/constants';
 import SignUpForm from '../SignupForm';
 import './styles.css'
+
+const {
+    USER_TYPES
+} = constants;
 
 export default ({
     userType,
@@ -13,18 +19,22 @@ export default ({
     errorMessage
 }) => {
     if (userType) {
-        const chooseUserButton = userType === process.env.USER_TYPE_TENANT ? (
-            <Button onClick={() => chooseUser(process.env.USER_TYPE_LANDLORD)}>Signup as a landlord</Button>
+        const chooseUserButton = userType === USER_TYPES.CLIENT ? (
+            <Button color='blue' onClick={() => chooseUser(USER_TYPES.ORGANISATION)}>Sign up as an organisation</Button>
         ) : (
-            <Button onClick={() => chooseUser(process.env.USER_TYPE_TENANT)}>Signup as a tenant</Button>
+            <div>
+                <span className="infoText">Looking for resources?</span>
+                <Button color='blue' onClick={() => chooseUser(USER_TYPES.CLIENT)}>Sign up as an individual</Button>
+            </div>
         );
 
         return (
-            <div>
+            <div id='signupFormWrapper'>
                 <div className='rightAligned'>
                     {chooseUserButton}
                 </div>
                 <SignUpForm
+                    userType={userType}
                     className='signUpForm'
                     onSubmit={onSubmit(formValues, userType)}
                     isProcessing={isFormProcessing}
@@ -37,8 +47,8 @@ export default ({
     return (
         <div id='signUpBody'>
             <div className='ui two buttons'>
-                <Button className='primaryColour' onClick={() => chooseUser(process.env.USER_TYPE_TENANT)}>Choose Tenant</Button>
-                <Button className='primaryColourAlt' onClick={() => chooseUser(process.env.USER_TYPE_LANDLORD)}>Choose Landlord</Button>
+                <Button basic color='green' onClick={() => chooseUser(USER_TYPES.CLIENT)}>Sign up as an individual</Button>
+                <Button basic color='green' onClick={() => chooseUser(USER_TYPES.ORGANISATION)}>Sign up as an organisation</Button>
             </div>
         </div>
     );
