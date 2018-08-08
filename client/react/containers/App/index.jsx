@@ -1,8 +1,6 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
-import { history } from '../../../redux/store';
 
 import Home from '../Home';
 import Navbar from '../../components/Navbar';
@@ -16,9 +14,7 @@ import Footer from '../../components/Footer'
 import './styles.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-const App = ({
-
-}) => (
+const App = () => (
     <div>
         <header>
             <Navbar />
