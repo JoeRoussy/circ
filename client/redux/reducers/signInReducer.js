@@ -2,6 +2,12 @@ const config = {
     errorMessage: null
 };
 
+import constants from '../../../common/constants';
+
+const {
+    ERRORS
+} = constants;
+
 const signInReducer = (state = config, actions) => {
     const {
         type: actionType,
@@ -19,12 +25,6 @@ const signInReducer = (state = config, actions) => {
             break;
         }
         case 'SIGN_IN_FORM_SUBMIT_FULFILLED': {
-            const {
-                data: {
-                    token
-                } = {}
-            } = payload;
-
             state = {
                 ...state,
                 isFormProcessing: false
@@ -46,9 +46,9 @@ const signInReducer = (state = config, actions) => {
             if (errorKey) {
                 // We got an error key back so use an error message that relates to it
                 const errorMessages = {
-                    [process.env.SIGNIN_ERRORS_MISSING_VALUES]: 'Please make sure you provide a user name and a password',
-                    [process.env.SIGNIN_ERRORS_GENERIC]: 'Your request could not be processed',
-                    [process.env.SIGNIN_ERRORS_INVALID_CREDENTIALS]: 'Invalid credentials'
+                    [ERRORS.SIGN_IN.MISSING_VALUES]: 'Please make sure you provide a user name and a password',
+                    [ERRORS.SIGN_IN.GENERIC]: 'Your request could not be processed',
+                    [ERRORS.SIGN_IN.INVALID_CREDENTIALS]: 'Your username or password does not match our records'
                 };
 
                 errorMessage = errorMessages[errorKey];

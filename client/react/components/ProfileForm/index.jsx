@@ -75,7 +75,7 @@ const ProfileForm = ({
                 <Field
                     name='name'
                     component={InputField}
-                    label={{ content: <Icon color='blue' name='user' size='large' /> }}
+                    label='Name'
                     labelPosition='left'
                     placeholder='Name'
                 />

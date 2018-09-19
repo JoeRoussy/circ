@@ -6,6 +6,11 @@ import { sendError } from './utils';
 import { getUserByEmail } from '../components/data';
 import { comparePasswords } from '../components/authentication';
 import { transformUserForOutput } from '../components/transformers';
+import constants from '../../common/constants';
+
+const {
+    ERRORS
+} = constants;
 
 export const login = ({
     usersCollection = required('usersCollection'),
@@ -18,11 +23,11 @@ export const login = ({
         } = {}
     } = req;
 
-    const {
-         SIGNIN_ERRORS_MISSING_VALUES,
-         SIGNIN_ERRORS_INVALID_CREDENTIALS,
-         SIGNIN_ERRORS_GENERIC
-    } = process.env;
+    // const {
+    //      SIGNIN_ERRORS_MISSING_VALUES,
+    //      SIGNIN_ERRORS_INVALID_CREDENTIALS,
+    //      SIGNIN_ERRORS_GENERIC
+    // } = process.env;
 
     if (!email || !password) {
         logger.warn(req.body, 'Got a log in submission with missing values');
@@ -31,7 +36,7 @@ export const login = ({
             res,
             status: 400,
             message: 'name and password are required',
-            errorKey: SIGNIN_ERRORS_MISSING_VALUES
+            errorKey: ERRORS.SIGN_IN.MISSING_VALUES
         });
     }
 
@@ -50,7 +55,7 @@ export const login = ({
             res,
             status: 400,
             message: 'error during log in',
-            errorKey: SIGNIN_ERRORS_MISSING_VALUES
+            errorKey: ERRORS.SIGN_IN.MISSING_VALUES
         });
     }
 
@@ -63,7 +68,7 @@ export const login = ({
             res,
             status: 400,
             message: 'Invalid credentials',
-            errorKey: SIGNIN_ERRORS_INVALID_CREDENTIALS
+            errorKey: ERRORS.SIGN_IN.INVALID_CREDENTIALS
         });
     }
 
@@ -79,7 +84,7 @@ export const login = ({
             res,
             status: 500,
             message: 'Error during login',
-            errorKey: SIGNIN_ERRORS_GENERIC
+            errorKey: ERRORS.SIGN_IN.GENERIC
         })
     }
 
@@ -91,7 +96,7 @@ export const login = ({
             res,
             status: 400,
             message: 'Invalid credentials',
-            errorKey: SIGNIN_ERRORS_INVALID_CREDENTIALS
+            errorKey: ERRORS.SIGN_IN.INVALID_CREDENTIALS
         });
     }
 

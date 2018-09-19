@@ -9,6 +9,11 @@ const constants = {
             GENERIC: 'errors_sign_up_generic',
             MISSING_VALUES: 'errors_sign_up_missing_values',
             INVALID_VALUES: 'errors_sign_up_invalid_values'
+        },
+        SIGN_IN: {
+            'MISSING_VALUES': 'errors_sign_in_missing_values',
+            'GENERIC': 'errors_sign_in_generic',
+            'INVALID_CREDENTIALS': 'errors_sign_up_invalid_credentials'
         }
     },
     VERIFICATION_TYPES: {
