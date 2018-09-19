@@ -23,12 +23,6 @@ export const login = ({
         } = {}
     } = req;
 
-    // const {
-    //      SIGNIN_ERRORS_MISSING_VALUES,
-    //      SIGNIN_ERRORS_INVALID_CREDENTIALS,
-    //      SIGNIN_ERRORS_GENERIC
-    // } = process.env;
-
     if (!email || !password) {
         logger.warn(req.body, 'Got a log in submission with missing values');
 
