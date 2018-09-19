@@ -14,7 +14,8 @@ import {
     cancelEditProfilePicture,
     deleteProfile,
     cancelDeleteProfile,
-    confirmDeleteProfile
+    confirmDeleteProfile,
+    newProfileImageSelected
 } from '../../../redux/actions/profileActions';
 import { navigateTo as getNavigateTo } from '../../../components';
 
@@ -37,7 +38,9 @@ const Profile = ({
     onDeleteClicked,
     onCancelDeleteClicked,
     onDeleteConfirmedClicked,
-    isDeletePending
+    isDeletePending,
+    selectedImage,
+    onProfileImageChange
 }) => {
     const redirectSection = user ? '' : <Redirect to='/sign-in'/>;
 
@@ -58,6 +61,8 @@ const Profile = ({
             onCancelPictureEditClicked={onCancelPictureEditClicked}
             isEditingPicture={isEditingPicture}
             navigateTo={navigateTo}
+            selectedImage={selectedImage}
+            onProfileImageChange={onProfileImageChange}
         />
     ) : (
         <ProfileDisplay
@@ -96,7 +101,8 @@ const mapStateToProps = ({
         isEditing,
         isEditingPicture,
         isDeleting,
-        isDeletePending
+        isDeletePending,
+        selectedImage
     } = {}
 }) => ({
     user,
@@ -106,7 +112,8 @@ const mapStateToProps = ({
     isEditing,
     isEditingPicture,
     isDeleting,
-    isDeletePending
+    isDeletePending,
+    selectedImage
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -124,7 +131,8 @@ const mapDispatchToProps = (dispatch) => ({
     navigateTo: getNavigateTo(dispatch),
     onDeleteClicked: () => dispatch(deleteProfile()),
     onCancelDeleteClicked: () => dispatch(cancelDeleteProfile()),
-    onDeleteConfirmedClicked: () => dispatch(confirmDeleteProfile)
+    onDeleteConfirmedClicked: () => dispatch(confirmDeleteProfile),
+    onProfileImageChange: (update) => dispatch(newProfileImageSelected(update[0]))
 });
 
 

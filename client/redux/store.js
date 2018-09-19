@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
@@ -13,6 +13,6 @@ export const history = createHistory();
 const middleware = applyMiddleware(promise(), thunk, routerMiddleware(history));
 
 /* Create the store using our reducers, initialState, and middleware */
-const store = createStore(reducers, middleware);
+const store = createStore(reducers, composeWithDevTools(middleware));
 
 export default store;

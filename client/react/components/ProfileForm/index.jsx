@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Icon, Button, Input, Message, Grid, Image } from 'semantic-ui-react';
-import { InputField, UploadField, Upload } from 'react-semantic-redux-form';
+import { Form, Button, Message, Grid, Image } from 'semantic-ui-react';
+import { InputField } from 'react-semantic-redux-form';
 
 import FileInput from '../FileInput';
 
@@ -43,7 +43,9 @@ const ProfileForm = ({
     isEditingPicture,
     onPictureEditClicked,
     onCancelPictureEditClicked,
-    navigateTo
+    navigateTo,
+    selectedImage,
+    onProfileImageChange
 }) => {
     const profilePictureRightSection = isEditingPicture ? (
         <Grid.Column>
@@ -53,7 +55,13 @@ const ProfileForm = ({
                 label='Upload a profile picture'
                 accept='image/x-png,image/jpeg'
                 iconName='image'
+                onChange={onProfileImageChange}
             />
+            {selectedImage ? (
+                <div className='imagePreviewWrapper'>
+                    <img src={selectedImage}></img>
+                </div>
+            ) : ''}
         <Button className='primaryColour' type='button' id='profileKeepOldPictureButton' onClick={onCancelPictureEditClicked}>Keep Old Profile Picture</Button>
         </Grid.Column>
     ) : (

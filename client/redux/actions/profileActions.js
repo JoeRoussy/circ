@@ -17,38 +17,6 @@ export const submitForm = (formData) => (dispatch) => {
         successToast: 'Your profile has been updated',
         errorToast: 'Your profile could not be updated. Please try again later.'
     });
-
-    // NOTE: The id of the user is snuck in as an inital value of the form
-    axios.put(`${process.env.API_ROOT}/api/users/${formData._id}`, submissionData)
-        .then((res) => {
-            const {
-                data: {
-                    token
-                } = {}
-            } = res;
-
-            // The value of the user has changed so we should save a new token
-            // NOTE: The user reducer will take care of setting the new value of the user in the state
-            setJwt(token);
-
-            // Use a toast to notify the user that their submission was successful
-            toast.success('Your profile has been updated');
-
-            dispatch(setCurrentUser(jwtDecode(token)));
-            dispatch({
-                type: 'PROFILE_FORM_SUBMIT_FULFILLED',
-                payload: res
-            });
-
-            // We must return the res object so it can be used by other fulfilled handlers (in reducers for example)
-            return res;
-        })
-        .catch((e) => {
-            dispatch({
-                type: 'PROFILE_FORM_SUBMIT_REJECTED',
-                payload: e
-            });
-        });
 };
 
 export const editProfile = () => ({
@@ -83,3 +51,17 @@ export const confirmDeleteProfile = (dispatch) => (handleUserUpdateRequest({
     errorToast: 'Could not delete profile. Please try again later.',
     autoClose: false
 }));
+
+export const newProfileImageSelected = (newProfileImage) => (dispatch) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+        // The onload cb is called when the file is acutally after the next function call
+        // We dispatch the data string so it can be used in some other markup
+        dispatch({
+            type: 'PROFILE_PICTURE_SELECTED',
+            payload: fileReader.result
+        });
+    }
+
+    fileReader.readAsDataURL(newProfileImage);
+};

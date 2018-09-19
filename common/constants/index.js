@@ -25,7 +25,8 @@ const constants = {
         TEMPLATE_LAYOUT_PATH: 'app/components/mail-sender/templates/layouts',
         DEFAULT_LAYOUT: 'main',
         TEMPLATE_PARTIALS: 'app/components/mail-sender/templates/partials'
-    }
+    },
+    REDUX_FORM_CHANGE_ACTION_TYPE: '@@redux-form/CHANGE'
 };
 
 export default constants;

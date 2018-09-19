@@ -132,6 +132,14 @@ const profileReducer = (state = config, actions) => {
 
             break;
         }
+        case 'PROFILE_PICTURE_SELECTED': {
+            state = {
+                ...state,
+                selectedImage: payload
+            }
+
+            break;
+        }
     }
 
     return state;
