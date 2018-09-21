@@ -47,7 +47,7 @@ const ProfileForm = ({
     selectedImage,
     onProfileImageChange
 }) => {
-    const profilePictureRightSection = isEditingPicture ? (
+    const profilePictureEditSection = isEditingPicture ? (
         <Grid.Column>
             <Field
                 name='profilePic'
@@ -59,6 +59,7 @@ const ProfileForm = ({
             />
             {selectedImage ? (
                 <div className='imagePreviewWrapper'>
+                    <div className='title'>New Profile Picutre Preview</div>
                     <img src={selectedImage}></img>
                 </div>
             ) : ''}
@@ -88,13 +89,13 @@ const ProfileForm = ({
                     placeholder='Name'
                 />
             <Button className='primaryColour' type='button' onClick={() => navigateTo('/change-password')}>Change Password</Button>
-            <Grid columns={2}>
-                <Grid.Column>
-                    <Image className='profilePicture' src={`${process.env.ASSETS_ROOT}${profilePictureLink}`} />
-                </Grid.Column>
-                {profilePictureRightSection}
-            </Grid>
-
+            <div id='currentProfilePictureWrapper'>
+                <div className="title">Profile Picutre</div>
+                <Image className='profilePicture' src={`${process.env.ASSETS_ROOT}${profilePictureLink}`} />
+            </div>
+            <div id='profilePictureEditSection'>
+                {profilePictureEditSection}
+            </div>
             <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Update Profile</Button>
             </Form>
         </div>
