@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Icon, Button, Input, Message, Grid, Image } from 'semantic-ui-react';
-import { InputField, UploadField, Upload } from 'react-semantic-redux-form';
+import { Form, Button, Message, Grid, Image } from 'semantic-ui-react';
+import { InputField } from 'react-semantic-redux-form';
 
 import FileInput from '../FileInput';
 
@@ -43,9 +43,11 @@ const ProfileForm = ({
     isEditingPicture,
     onPictureEditClicked,
     onCancelPictureEditClicked,
-    navigateTo
+    navigateTo,
+    selectedImage,
+    onProfileImageChange
 }) => {
-    const profilePictureRightSection = isEditingPicture ? (
+    const profilePictureEditSection = isEditingPicture ? (
         <Grid.Column>
             <Field
                 name='profilePic'
@@ -53,7 +55,14 @@ const ProfileForm = ({
                 label='Upload a profile picture'
                 accept='image/x-png,image/jpeg'
                 iconName='image'
+                onChange={onProfileImageChange}
             />
+            {selectedImage ? (
+                <div className='imagePreviewWrapper'>
+                    <div className='title'>New Profile Picutre Preview</div>
+                    <img src={selectedImage}></img>
+                </div>
+            ) : ''}
         <Button className='primaryColour' type='button' id='profileKeepOldPictureButton' onClick={onCancelPictureEditClicked}>Keep Old Profile Picture</Button>
         </Grid.Column>
     ) : (
@@ -75,18 +84,18 @@ const ProfileForm = ({
                 <Field
                     name='name'
                     component={InputField}
-                    label={{ content: <Icon color='blue' name='user' size='large' /> }}
+                    label='Name'
                     labelPosition='left'
                     placeholder='Name'
                 />
             <Button className='primaryColour' type='button' onClick={() => navigateTo('/change-password')}>Change Password</Button>
-            <Grid columns={2}>
-                <Grid.Column>
-                    <Image className='profilePicture' src={`${process.env.ASSETS_ROOT}${profilePictureLink}`} />
-                </Grid.Column>
-                {profilePictureRightSection}
-            </Grid>
-
+            <div id='currentProfilePictureWrapper'>
+                <div className="title">Profile Picutre</div>
+                <Image className='profilePicture' src={`${process.env.ASSETS_ROOT}${profilePictureLink}`} />
+            </div>
+            <div id='profilePictureEditSection'>
+                {profilePictureEditSection}
+            </div>
             <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Update Profile</Button>
             </Form>
         </div>

@@ -15,7 +15,6 @@ const SignIn = ({
     isFormProcessing,
     errorMessage,
     formValues,
-    onForgotPasswordClick,
     navigateTo
 }) => (
     <Container className='rootContainer'>

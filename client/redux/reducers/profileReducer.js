@@ -36,7 +36,8 @@ const profileReducer = (state = config, actions) => {
         case 'EDIT_PROFILE_PICTURE_CANCELLED': {
             state = {
                 ...state,
-                isEditingPicture: false
+                isEditingPicture: false,
+                selectedImage: null
             }
 
             break;
@@ -129,6 +130,14 @@ const profileReducer = (state = config, actions) => {
                 isDeletePending: false,
                 isDeleting: false
             };
+
+            break;
+        }
+        case 'PROFILE_PICTURE_SELECTED': {
+            state = {
+                ...state,
+                selectedImage: payload
+            }
 
             break;
         }
