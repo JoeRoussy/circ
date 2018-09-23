@@ -1,5 +1,16 @@
 const config = {};
 
+import constants from '../../../common/constants';
+
+const {
+    ERRORS: {
+        PROFILE_EDIT: {
+            GENERIC: GENERIC_ERROR,
+            INCORRECT_PASSWORD: INCORRECT_PASSWORD_ERROR
+        }
+    }
+} = constants;
+
 const changePasswordReducer = (state = config, actions) => {
     const {
         type,
@@ -37,8 +48,8 @@ const changePasswordReducer = (state = config, actions) => {
 
             if (errorKey) {
                 const errorMessages = {
-                    [process.env.PROFILE_EDIT_ERRORS_GENERIC]: 'Your password could not be updated.',
-                    [process.env.PROFILE_EDIT_ERRORS_INCORRECT_PASSWORD]: 'Incorrect password'
+                    [GENERIC_ERROR]: 'Your password could not be updated.',
+                    [INCORRECT_PASSWORD_ERROR]: 'Your old password does not match our records.'
                 };
 
                 errorMessage = errorMessages[errorKey];

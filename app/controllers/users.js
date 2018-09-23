@@ -34,6 +34,10 @@ const {
             GENERIC: GENERIC_SIGN_UP_ERROR,
             MISSING_VALUES: MISSING_VALUES_SIGN_UP_ERROR,
             INVALID_VALUES: INVALID_VALUES_SIGN_UP_ERROR
+        },
+        PROFILE_EDIT: {
+            GENERIC: GENERIC_PROFILE_EDIT_ERROR,
+            INCORRECT_PASSWORD: INCORRECT_PASSWORD_PROFILE_EDIT_ERROR
         }
     }
 } = constants;
@@ -283,9 +287,7 @@ export const editUser = ({
 
     const {
         PROFILE_EDIT_ERRORS_GENERIC,
-        PROFILE_EDIT_ERRORS_DUPLICATE_EMAIL,
         UPLOADS_RELATIVE_PATH,
-        PROFILE_EDIT_ERRORS_INCORRECT_PASSWORD
     } = process.env;
 
     let hashedNewPassword;
@@ -341,7 +343,7 @@ export const editUser = ({
                 res,
                 status: 400,
                 message: 'Incorrect password',
-                errorKey: PROFILE_EDIT_ERRORS_INCORRECT_PASSWORD
+                errorKey: INCORRECT_PASSWORD_PROFILE_EDIT_ERROR
             });
         }
 
