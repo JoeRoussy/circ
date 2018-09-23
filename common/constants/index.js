@@ -23,6 +23,9 @@ const constants = {
             INVALID_TOKEN: 'password_reset_errors_invalid_token',
             GENERIC: 'password_reset_errors_generic',
             NO_USER_FOR_EMAIL: 'password_reset_errors_no_user_for_email'
+        },
+        IMAGE_PROCESSING: {
+            GENERIC: 'image_processing_generic_error'
         }
     },
     VERIFICATION_TYPES: {
