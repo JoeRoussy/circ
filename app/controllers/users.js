@@ -27,19 +27,19 @@ const {
     USER_TYPES: {
         CLIENT: CLIENT_TYPE,
         ORGANISATION: ORGANISATION_TYPE
-    },
+    } = {},
     ERRORS: {
         SIGN_UP: {
             EXISTING_EMAIL: EXISTING_EMAIL_ERROR,
             GENERIC: GENERIC_SIGN_UP_ERROR,
             MISSING_VALUES: MISSING_VALUES_SIGN_UP_ERROR,
             INVALID_VALUES: INVALID_VALUES_SIGN_UP_ERROR
-        },
+        } = {},
         PROFILE_EDIT: {
             GENERIC: GENERIC_PROFILE_EDIT_ERROR,
             INCORRECT_PASSWORD: INCORRECT_PASSWORD_PROFILE_EDIT_ERROR
-        }
-    }
+        } = {}
+    } = {}
 } = constants;
 
 

@@ -14,6 +14,9 @@ import constants from '../../../common/constants';
 const {
     VERIFICATION_TYPES: {
         EMAIL: EMAIL_VERIFICATION_TYPE
+    } = {},
+    PASSWORD_RESET: {
+        MAX_REQUEST_DAYS: PASSWORD_RESET_DURATION_DAYS
     } = {}
 } = constants;
 
@@ -156,11 +159,7 @@ export const getUserForPasswordReset = async({
     passwordResetsCollection = required('passwordResetsCollection'),
     urlIdentifyer = required('urlIdentifyer')
 }) => {
-    const {
-        PASSWORD_RESET_DURATION_DAYS = required('PASSWORD_RESET_DURATION_DAYS')
-    } = process.env;
-
-    const maxRequestDuration = +PASSWORD_RESET_DURATION_DAYS;
+    const maxRequestDuration = PASSWORD_RESET_DURATION_DAYS;
     const maxPossibleDateString = moment().add(maxRequestDuration, 'days').endOf('day').toISOString();
 
     try {

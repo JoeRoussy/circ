@@ -2,6 +2,16 @@ const config = {
     email: null
 };
 
+import constants from '../../../common/constants';
+
+const {
+    ERRORS: {
+        PASSWORD_RESET: {
+            NO_USER_FOR_EMAIL: NO_USER_FOR_EMAIL_ERROR
+        } = {}
+    } = {}
+} = constants;
+
 const forgotPasswordReducer = (state = config, actions) => {
     const {
         type,
@@ -44,9 +54,9 @@ const forgotPasswordReducer = (state = config, actions) => {
 
             let errorMessage = 'There was an error processing your request.';
 
-            if (errorKey === process.env.PASSWORD_RESET_ERRORS_NO_USER_FOR_EMAIL) {
+            if (errorKey === NO_USER_FOR_EMAIL_ERROR) {
                 errorMessage = 'We could not find an account associated with that email.'
-            };
+            }
 
             state = {
                 ...state,

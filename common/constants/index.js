@@ -18,6 +18,11 @@ const constants = {
         PROFILE_EDIT: {
             'GENERIC': 'profile_edit_errors_generic',
             'INCORRECT_PASSWORD': 'profile_edit_errors_incorrect_password'
+        },
+        PASSWORD_RESET: {
+            INVALID_TOKEN: 'password_reset_errors_invalid_token',
+            GENERIC: 'password_reset_errors_generic',
+            NO_USER_FOR_EMAIL: 'password_reset_errors_no_user_for_email'
         }
     },
     VERIFICATION_TYPES: {
@@ -30,7 +35,10 @@ const constants = {
         DEFAULT_LAYOUT: 'main',
         TEMPLATE_PARTIALS: 'app/components/mail-sender/templates/partials'
     },
-    REDUX_FORM_CHANGE_ACTION_TYPE: '@@redux-form/CHANGE'
+    REDUX_FORM_CHANGE_ACTION_TYPE: '@@redux-form/CHANGE',
+    PASSWORD_RESET: {
+        MAX_REQUEST_DAYS: 30
+    }
 };
 
 export default constants;

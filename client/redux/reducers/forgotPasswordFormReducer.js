@@ -2,6 +2,16 @@ const config = {
     token: null
 };
 
+import constants from '../../../common/constants';
+
+const {
+    ERRORS: {
+        PASSWORD_RESET: {
+            INVALID_TOKEN: INVALID_TOKEN_ERROR
+        } = {}
+    } = {}
+} = constants;
+
 const forgotPasswordFormReducer = (state = config, actions) => {
     const {
         type,
@@ -49,7 +59,7 @@ const forgotPasswordFormReducer = (state = config, actions) => {
 
             let errorMessage = 'There was an error processing your request.';
 
-            if (errorKey === process.env.PASSWORD_RESET_ERRORS_INVALID_TOKEN) {
+            if (errorKey === INVALID_TOKEN_ERROR) {
                 errorMessage = 'It looks like you are using an old password resert link. If you do not know your password, click the Forgot Password button on the log in page.'
             }
 

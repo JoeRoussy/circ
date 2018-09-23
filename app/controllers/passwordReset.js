@@ -10,6 +10,17 @@ import { sendPasswordResetEmail } from '../components/mail-sender';
 import { transformUserForOutput } from '../components/transformers';
 import { generateHash as generatePasswordHash } from '../components/authentication';
 import { isPassword } from '../../common/validation';
+import constants from '../../common/constants';
+
+const {
+    ERRORS: {
+        PASSWORD_RESET: {
+            INVALID_TOKEN: INVALID_TOKEN_ERROR,
+            GENERIC: GENERIC_ERROR,
+            NO_USER_FOR_EMAIL: NO_USER_FOR_EMAIL_ERROR
+        } = {}
+    } = {}
+} = constants;
 
 export const sendEmail = ({
     passwordResetsCollection = required('passwordResetsCollection'),
@@ -19,11 +30,6 @@ export const sendEmail = ({
     const {
         email
     } = req.body;
-
-    const {
-        PASSWORD_RESET_ERRORS_NO_USER_FOR_EMAIL = required('PASSWORD_RESET_ERRORS_NO_USER_FOR_EMAIL').
-        PASSWORD_RESET_ERRORS_GENERIC = required('PASSWORD_RESET_ERRORS_GENERIC')
-    } = process.env;
 
     if (!isEmail(email)) {
         return sendError({
@@ -48,7 +54,7 @@ export const sendEmail = ({
             res,
             status: 500,
             message: 'There was an error processing your request',
-            errorKey: PASSWORD_RESET_ERRORS_GENERIC
+            errorKey: GENERIC_ERROR
         });
     }
 
@@ -57,7 +63,7 @@ export const sendEmail = ({
             res,
             status: 400,
             message: 'Could not find user with that email',
-            errorKey: PASSWORD_RESET_ERRORS_NO_USER_FOR_EMAIL
+            errorKey: NO_USER_FOR_EMAIL_ERROR
         });
     }
 
@@ -76,7 +82,7 @@ export const sendEmail = ({
             res,
             status: 500,
             message: 'There was an error processing your request',
-            errorKey: PASSWORD_RESET_ERRORS_GENERIC
+            errorKey: GENERIC_ERROR
         });
     }
 
@@ -93,7 +99,7 @@ export const sendEmail = ({
             res,
             status: 500,
             message: 'There was an error processing your request',
-            errorKey: PASSWORD_RESET_ERRORS_GENERIC
+            errorKey: GENERIC_ERROR
         });
     }
 
@@ -113,11 +119,6 @@ export const setNewPassword = ({
         token,
         password
     } = req.body;
-
-    const {
-        PASSWORD_RESET_ERRORS_INVALID_TOKEN = required('PASSWORD_RESET_ERRORS_INVALID_TOKEN'),
-        PASSWORD_RESET_ERRORS_GENERIC = required('PASSWORD_RESET_ERRORS_GENERIC')
-    } = process.env;
 
     if (!isPassword(password)) {
         // No key needed because the front end already does this validation
@@ -144,7 +145,7 @@ export const setNewPassword = ({
             res,
             status: 500,
             message: 'Something went wrong processing your request',
-            errorKey: PASSWORD_RESET_ERRORS_GENERIC
+            errorKey: GENERIC_ERROR
         });
     }
 
@@ -153,7 +154,7 @@ export const setNewPassword = ({
             res,
             status: 400,
             message: 'Invalid password reset token',
-            errorKey: PASSWORD_RESET_ERRORS_INVALID_TOKEN
+            errorKey: INVALID_TOKEN_ERROR
         });
     }
 
@@ -183,12 +184,12 @@ export const setNewPassword = ({
             res,
             status: 500,
             message: 'Something went wrong processing your request',
-            errorKey: PASSWORD_RESET_ERRORS_GENERIC
+            errorKey: GENERIC_ERROR
         });
     }
 
     // Now get a jwt for this new user
-    const jwtToken = jwt.sign(transformUserForOutput(user), process.env.JWT_SECRET);
+    const jwtToken = jwt.sign(transformUserForOutput(newUser), process.env.JWT_SECRET);
 
     // Update the password reset as expired
     findAndUpdate({
