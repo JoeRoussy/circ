@@ -6,6 +6,16 @@ import { wrap as coroutine } from 'co';
 import { required } from '../custom-utils';
 import validateImage from '../validate-image';
 
+import constants from '../../../common/constants';
+
+const {
+    ERRORS: {
+        IMAGE_PROCESSING: {
+            GENERIC: IMAGE_PROCESSING_ERROR
+        } = {}
+    } = {}
+} = constants;
+
 // Provides middleware to parse a file uploaded under on a field defined by name
 // Parsed file will be avaiable in req.file
 export const processFileUpload = ({
@@ -50,7 +60,7 @@ export const processFileUpload = ({
                 if (!extension) {
                     return cb({
                         message: `Could not convert mimetype: ${mimetype} to a file extension`,
-                        key: process.env.ERRORS_IMAGE_PROCESSING
+                        key: IMAGE_PROCESSING_ERROR
                     });
                 }
 

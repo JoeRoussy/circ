@@ -2,7 +2,7 @@ import express from 'express';
 
 import { getChildLogger } from '../components/log-factory';
 import { required } from '../components/custom-utils';
-import { createUser, editUser, deleteCurrentUser, fetchRecommenedRoommates, userSearch } from '../controllers/users';
+import { createUser, editUser, deleteCurrentUser, userSearch } from '../controllers/users';
 import { canModifyUser, isAuthenticated } from '../controllers/utils';
 import {
     processFileUpload as parseImageUpload,
@@ -93,20 +93,6 @@ export default ({
             })
         })
     ]);
-
-    userRouter.get('/:id/recommendedRoommates', [
-        isAuthenticated,
-        fetchRecommenedRoommates({
-            roommateSurveysCollection: db.collection('roommateSurveys'),
-            logger: getChildLogger({
-                baseLogger,
-                additionalFields: {
-                    module: 'api-users-get-roommate-recommendations'
-                }
-            })
-        })
-    ]);
-
 
     return userRouter;
 }

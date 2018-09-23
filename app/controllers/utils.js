@@ -2,6 +2,16 @@ import { wrap as coroutine } from 'co';
 import { required } from '../components/custom-utils';
 import { getById } from '../components/db/service';
 
+import constants from '../../common/constants';
+
+const {
+    ERRORS: {
+        USER: {
+            NOT_LOGGED_IN: NOT_LOGGED_IN_ERROR
+        } = {}
+    } = {}
+} = constants;
+
 export const sendError = ({
     res,
     status,
@@ -20,7 +30,7 @@ export const isAuthenticated = (req, res, next) => {
             res,
             status: 403,
             message: 'You are not authorized to perform this action',
-            errorKey: process.env.USER_ERROR_NOT_LOGGED_IN
+            errorKey: NOT_LOGGED_IN_ERROR
         });
     }
 
@@ -35,22 +45,6 @@ export const isEmailVerified = (req, res, next) => {
             status: 400,
             message: 'You need to confirm your email to perform this action'
         });
-    }
-
-    return next();
-}
-
-// Checks if user is a landlord
-export const isLandlord = (req, res, next) => {
-    if (req.user) {
-        if(!req.user.isLandlord) {
-            return sendError({
-                res,
-                status: 403,
-                message: 'You must be a landlord to perform this action',
-                errorKey: process.env.USER_ERROR_NOT_LANDLORD
-            });
-        }
     }
 
     return next();

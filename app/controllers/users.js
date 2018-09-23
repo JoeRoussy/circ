@@ -27,15 +27,19 @@ const {
     USER_TYPES: {
         CLIENT: CLIENT_TYPE,
         ORGANISATION: ORGANISATION_TYPE
-    },
+    } = {},
     ERRORS: {
         SIGN_UP: {
             EXISTING_EMAIL: EXISTING_EMAIL_ERROR,
             GENERIC: GENERIC_SIGN_UP_ERROR,
             MISSING_VALUES: MISSING_VALUES_SIGN_UP_ERROR,
             INVALID_VALUES: INVALID_VALUES_SIGN_UP_ERROR
-        }
-    }
+        } = {},
+        PROFILE_EDIT: {
+            GENERIC: GENERIC_PROFILE_EDIT_ERROR,
+            INCORRECT_PASSWORD: INCORRECT_PASSWORD_PROFILE_EDIT_ERROR
+        } = {}
+    } = {}
 } = constants;
 
 
@@ -179,7 +183,6 @@ export const createUser = ({
                 name,
                 email,
                 password: hashedPassword,
-                isLandlord: userType === process.env.USER_TYPE_LANDLORD,
                 isEmailConfirmed: false,
                 isInactive: false,
                 profilePictureLink
@@ -282,10 +285,7 @@ export const editUser = ({
     } = req;
 
     const {
-        PROFILE_EDIT_ERRORS_GENERIC,
-        PROFILE_EDIT_ERRORS_DUPLICATE_EMAIL,
         UPLOADS_RELATIVE_PATH,
-        PROFILE_EDIT_ERRORS_INCORRECT_PASSWORD
     } = process.env;
 
     let hashedNewPassword;
@@ -317,7 +317,7 @@ export const editUser = ({
                 res,
                 status: 400,
                 message: 'Could not update user',
-                errorKey: PROFILE_EDIT_ERRORS_GENERIC
+                errorKey: GENERIC_PROFILE_EDIT_ERROR
             });
         }
 
@@ -332,7 +332,7 @@ export const editUser = ({
                 res,
                 status: 500,
                 message: 'Could not update user',
-                errorKey: PROFILE_EDIT_ERRORS_GENERIC
+                errorKey: GENERIC_PROFILE_EDIT_ERROR
             });
         }
 
@@ -341,7 +341,7 @@ export const editUser = ({
                 res,
                 status: 400,
                 message: 'Incorrect password',
-                errorKey: PROFILE_EDIT_ERRORS_INCORRECT_PASSWORD
+                errorKey: INCORRECT_PASSWORD_PROFILE_EDIT_ERROR
             });
         }
 
@@ -377,7 +377,7 @@ export const editUser = ({
             res,
             status: 500,
             message: 'Could not update user',
-            errorKey: PROFILE_EDIT_ERRORS_GENERIC
+            errorKey: GENERIC_PROFILE_EDIT_ERROR
         });
     }
 
@@ -416,74 +416,5 @@ export const deleteCurrentUser = ({
 
     return res.json({
         user: transformUserForOutput(req.user)
-    });
-});
-
-export const fetchRecommenedRoommates = ({
-    roommateSurveysCollection = required('roommateSurveysCollection'),
-    logger = required('logger', 'You must pass in a logging instance')
-}) => coroutine(function* (req, res) {
-    const {
-        user: {
-            _id: userId
-        } = {}
-    } = req;
-
-    if (!userId) {
-        logger.error(req.user, 'Could not find id in currently logged in user. (User values included in this log)');
-
-        return sendError({
-            res,
-            status: 500,
-            message: 'There was an error processing your request'
-        });
-    }
-
-    // See if this user has completed a survey
-    let userSurvey;
-
-    try {
-        userSurvey = yield findRoommateSurveyResponse({
-            roommateSurveysCollection,
-            userId: convertToObjectId(userId)
-        })
-    } catch (e) {
-        logger.error(e, `Error finding existing survey response for user with id: ${userId}`);
-
-        return sendError({
-            res,
-            status: 500,
-            message: 'There was an error processing your request'
-        });
-    }
-
-    if (!userSurvey) {
-        // This user cannot have recommended roommates if they have not completed the survey
-        return res.json({
-            recommendedRoommates: [],
-            message: 'Complete the roommate survey to get recommended roommates.'
-        });
-    }
-
-    // Find recommendedRoommates for this user
-    let recommendedRoommates = [];
-
-    try {
-        recommendedRoommates = yield findRecommendedRoommates({
-            roommateSurveysCollection,
-            userSurveyResponse: userSurvey
-        });
-    } catch (e) {
-        logger.error(e, `Error generating recommended roommates for user with id: ${userId}`);
-
-        return sendError({
-            res,
-            status: 500,
-            message: 'Something went wrong processing your request'
-        });
-    }
-
-    return res.json({
-        recommendedRoommates
     });
 });
