@@ -38,6 +38,9 @@ const constants = {
     REDUX_FORM_CHANGE_ACTION_TYPE: '@@redux-form/CHANGE',
     PASSWORD_RESET: {
         MAX_REQUEST_DAYS: 30
+    },
+    AUTH: {
+        SALT_ROUNDS: 12
     }
 };
 

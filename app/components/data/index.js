@@ -8,7 +8,6 @@ import {
     getUniqueHash
 } from '../custom-utils';
 import { insert as insertInDb, findAndUpdate } from '../db/service';
-import { generateHash as hashPassword } from '../authentication';
 import constants from '../../../common/constants';
 
 const {
