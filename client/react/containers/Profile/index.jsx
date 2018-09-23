@@ -73,7 +73,6 @@ const Profile = ({
             onDeleteConfirmedClicked={onDeleteConfirmedClicked}
             onEditClicked={onEditClicked}
             isDeletePending={isDeletePending}
-            navigateTo={navigateTo}
         />
     )
 

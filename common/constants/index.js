@@ -26,6 +26,9 @@ const constants = {
         },
         IMAGE_PROCESSING: {
             GENERIC: 'image_processing_generic_error'
+        },
+        USER: {
+            NOT_LOGGED_IN: 'user_error_not_logged_in'
         }
     },
     VERIFICATION_TYPES: {

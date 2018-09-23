@@ -183,7 +183,6 @@ export const createUser = ({
                 name,
                 email,
                 password: hashedPassword,
-                isLandlord: userType === process.env.USER_TYPE_LANDLORD,
                 isEmailConfirmed: false,
                 isInactive: false,
                 profilePictureLink

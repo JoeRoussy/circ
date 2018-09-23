@@ -11,8 +11,7 @@ const ProfileDisplay = ({
     onEditClicked,
     onDeleteClicked,
     onCancelDeleteClicked,
-    onDeleteConfirmedClicked,
-    navigateTo
+    onDeleteConfirmedClicked
 }) => {
     // NOTE: Since this is an inner component we need to be worried about the user being ripped out the of the state
     if (!user) {
@@ -20,10 +19,6 @@ const ProfileDisplay = ({
     }
 
     let editSection;
-
-    const viewListingsButton = user.isLandlord ? (
-        <Button className='primaryColour' id="viewListingsProfileButton" onClick = { () => navigateTo('/my-listings') }>View my listings</Button>
-    ) : ('');
 
     if (isDeleting) {
         editSection = (
@@ -42,7 +37,6 @@ const ProfileDisplay = ({
     } else {
         editSection = (
             <div>
-                {viewListingsButton}
                 <Button className='primaryColour' id="editProfileButton" onClick={onEditClicked}>Edit Profile</Button>
                 <Button id="deleteProfileButton" color="red" onClick={onDeleteClicked}>Delete Profile</Button>
             </div>
