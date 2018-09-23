@@ -16,8 +16,8 @@ const constants = {
             'INVALID_CREDENTIALS': 'errors_sign_up_invalid_credentials'
         },
         PROFILE_EDIT: {
-            'GENERIC': 'profile_edit_errors_generic',
-            'INCORRECT_PASSWORD': 'profile_edit_errors_incorrect_password'
+            GENERIC: 'profile_edit_errors_generic',
+            INCORRECT_PASSWORD: 'profile_edit_errors_incorrect_password'
         },
         PASSWORD_RESET: {
             INVALID_TOKEN: 'password_reset_errors_invalid_token',

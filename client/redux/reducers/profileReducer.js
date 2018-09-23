@@ -61,26 +61,7 @@ const profileReducer = (state = config, actions) => {
             break;
         }
         case 'PROFILE_FORM_SUBMIT_REJECTED': {
-            const {
-                response: {
-                    data: {
-                        errorKey
-                    } = {}
-                } = {}
-            } = payload;
-
-            let errorMessage;
-
-            if (errorKey) {
-                const errorMessages = {
-                    [process.env.PROFILE_EDIT_ERRORS_GENERIC]: 'Your profile could not be updated.',
-                    [process.env.PROFILE_EDIT_ERRORS_DUPLICATE_EMAIL]: 'A user with that email already exists'
-                };
-
-                errorMessage = errorMessages[errorKey];
-            } else {
-                errorMessage = 'Your profile could not be updated.';
-            }
+            const errorMessage = 'Your profile could not be updated.';
 
             state = {
                 ...state,
