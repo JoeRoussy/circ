@@ -183,6 +183,7 @@ export const createUser = ({
                 name,
                 email,
                 password: hashedPassword,
+                type: userType,
                 isEmailConfirmed: false,
                 isInactive: false,
                 profilePictureLink
