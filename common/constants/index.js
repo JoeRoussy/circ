@@ -1,7 +1,7 @@
 const constants = {
     USER_TYPES: {
-        CLIENT: 'user_type_client',
-        ORGANISATION: 'user_type_organisation'
+        CLIENT: 'client',
+        ORGANISATION: 'organisation'
     },
     ERRORS: {
         SIGN_UP: {
