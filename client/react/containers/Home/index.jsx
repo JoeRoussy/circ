@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import { Redirect } from 'react-router';
@@ -8,10 +8,17 @@ import { toast } from 'react-toastify';
 
 import { setPasswordResetToken } from '../../../redux/actions/forgotPasswordFormActions';
 import { setCurrentUser} from '../../../redux/actions/userActions';
+import { setJwt, navigateTo as getNavigateTo } from '../../../components';
 
-import { setJwt } from '../../../components';
+import constants from '../../../../common/constants';
 
 import './styles.css';
+
+const {
+    USER_TYPES: {
+        ORGANISATION
+    } = {}
+} = constants;
 
 @connect((store)=>({
     user: store.userReducer.user,
@@ -22,6 +29,7 @@ class Home extends Component {
         super(props)
 
         this.onPasswordResetToken = this.onPasswordResetToken.bind(this);
+        this.onProgramUploadClicked = this.onProgramUploadClicked.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +48,10 @@ class Home extends Component {
         this.props.dispatch(setPasswordResetToken(token));
     }
 
+    onProgramUploadClicked() {
+        getNavigateTo(this.props.dispatch)('/upload-program');
+    }
+
     render(){
         // TODO: There has to be a better way with server side rendering
         const queryParams = queryString.parse(this.props.location.search);
@@ -50,14 +62,25 @@ class Home extends Component {
             this.onPasswordResetToken(queryParams.passwordResetToken);
         }
 
+        let uploadProgramSection = null;
+
+        if (this.props.user && this.props.user.type == ORGANISATION) {
+            uploadProgramSection = (
+                <div className='programUploadWrapper'>
+                    <Button color='green' onClick={() => this.onProgramUploadClicked()}>Add Program</Button>
+                </div>
+            );
+        }
+
         return (
-            <div>
+            <div id='home'>
                 {passwordResetRedirect}
                 <div id='homeWrapper' className='section'>
                     <div id='heroOverlay'>
                     </div>
                     <Container id='homeSearchWrapper'>
                         <h1 id='homeHeading'>Connecting Indigenous Resources Canada</h1>
+                        {uploadProgramSection}
                     </Container>
                 </div>
             </div>

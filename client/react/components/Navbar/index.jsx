@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Container, Menu, Icon, Image } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
@@ -60,7 +60,6 @@ const mapDispatchToProps = (dispatch) => ({
     logout: () => {
         setJwt(null);
         dispatch(setCurrentUser(null));
-        dispatch(resetChat());
         toast.success('You have been logged out');
     }
 });
