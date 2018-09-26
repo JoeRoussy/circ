@@ -11,6 +11,7 @@ import profileReducer from './profileReducer';
 import changePasswordReducer from './changePasswordReducer';
 import forgotPasswordFormReducer from './forgotPasswordFormReducer';
 import forgotPasswordReducer from './forgotPasswordReducer';
+import uploadProgramReducer from './uploadProgramReducer';
 
 const reducers = combineReducers({
     userReducer,
@@ -20,7 +21,8 @@ const reducers = combineReducers({
     profileReducer,
     changePasswordReducer,
     forgotPasswordFormReducer,
-    forgotPasswordReducer
+    forgotPasswordReducer,
+    uploadProgramReducer
 });
 
 export default reducers;
