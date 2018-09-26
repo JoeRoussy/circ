@@ -10,6 +10,7 @@ import Profile from '../Profile';
 import ChangePassword from '../ChangePassword';
 import ForgotPassword from '../ForgotPassword';
 import ForgotPasswordForm from '../ForgotPasswordForm';
+import UploadProgram from '../UploadProgram';
 import Footer from '../../components/Footer'
 import './styles.css';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -28,6 +29,7 @@ const App = () => (
             <Route exact path="/change-password" component={ChangePassword} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
             <Route exact path="/forgot-password-form" component={ForgotPasswordForm} />
+            <Route exact path="/upload-program" component={UploadProgram} />
         </main>
         <footer>
             <Footer />
