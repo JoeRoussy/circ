@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Container } from 'semantic-ui-react';
-import { Redirect } from 'react-router';
 
 import ChangePasswordForm from '../../components/ChangePasswordForm';
+import Authenticated from '../../components/Authenticated';
 import { navigateTo as getNavigateTo } from '../../../components';
 import { submitForm } from '../../../redux/actions/changePasswordActions';
 
@@ -16,12 +16,9 @@ const ChangePassword = ({
     navigateTo,
     user,
     isProcessing
-}) => {
-    const redirectSection = user ? '' : <Redirect to='/sign-in'/>;
-
-    return (
+}) => (
+    <Authenticated test={!!user}>
         <Container className='rootContainer'>
-            {redirectSection}
             <h1>Change Password</h1>
             <ChangePasswordForm
                 onSubmit={onSubmit(formData)}
@@ -30,9 +27,9 @@ const ChangePassword = ({
                 navigateTo={navigateTo}
                 initialValues={{ _id: user ? user._id : null }}
             />
-        </Container>
-    );
-}
+        </Container>    
+    </Authenticated>
+);
 
 const mapStateToProps = ({
     changePasswordReducer: {
