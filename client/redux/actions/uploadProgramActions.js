@@ -26,3 +26,7 @@ export const submitForm = (formData) => (dispatch) => {
             });
         })
 };
+
+export const moreQuestions = () => ({
+    type: 'UPLOAD_PROGRAM_MORE_QUESTIONS_CLICKED'
+})

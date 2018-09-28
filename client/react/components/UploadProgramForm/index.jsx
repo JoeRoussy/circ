@@ -1,18 +1,28 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form, Button, Message } from 'semantic-ui-react';
-import { InputField } from 'react-semantic-redux-form';
+import { Form, Button, Message, Divider } from 'semantic-ui-react';
+import { InputField, Checkbox } from 'react-semantic-redux-form';
+
+import './styles.css';
 
 const validate = (values) => {
     let errors = {};
 
     const {
-        name
+        name,
+        address
     } = values;
 
     if (!name) {
         errors = {
             name: 'Please enter a name for the program',
+            ...errors
+        };
+    }
+
+    if (!address) {
+        errors = {
+            address: 'Please enter an address for the program',
             ...errors
         };
     }
@@ -24,8 +34,50 @@ const UploadProgramForm = ({
     onSubmit,
     isProcessing,
     valid,
-    errorMessage
+    errorMessage,
+    showFormCustomizationSection,
+    customQuestionsCounter,
+    onMoreQuestions
 }) => {
+    const formCustomizationSection = showFormCustomizationSection ? (
+        <div className='formCustomizationWrapper'>
+            <h2>Program Application Settings</h2>
+            <Field
+                name='applicationSubmissionEmail'
+                component={InputField}
+                label='Email To Send Applications To:'
+                labelPosition='left'
+                placeholder='Email'
+            />
+            {customQuestionsCounter.map((x, index) => (
+                <div className='customQuestionWrapper' key={index}>
+                    <Divider />
+                    <div className='questionName'>
+                        <Field
+                            name={`customQuestionName[${index}]`}
+                            component={InputField}
+                            label='Field Name'
+                            labelPosition='left'
+                            placeholder='Name'
+                        />
+                    </div>
+                    <div className='questionCheckbox'>
+                        <Field
+                            name={`customQuestionRequired[${index}]`}
+                            component={Checkbox}
+                            label='Required'
+                        />
+                    </div>
+                </div>
+                
+            )) }
+            <div className='addQuestionButtonWrapper'>
+                <Button type='button' color='green' onClick={onMoreQuestions}>Add another question</Button>
+            </div>
+        </div>
+    ) : '';
+
+
     return (
         <div id='uploadProgramForm'>
             <Form id='profileEditForm' onSubmit={onSubmit} error={!!errorMessage}>
@@ -41,6 +93,32 @@ const UploadProgramForm = ({
                     labelPosition='left'
                     placeholder='Name'
                 />
+                <Field
+                    name='address'
+                    component={InputField}
+                    label='Program Address'
+                    labelPosition='left'
+                    placeholder='Name'
+                />
+                <Field
+                    className='formElement'
+                    name='isIndigenousRan'
+                    component={Checkbox}
+                    label='The program has Indigenous leadership'
+                />
+                <Field
+                    className='formElement'
+                    name='isForWomen'
+                    component={Checkbox}
+                    label='This program is geared towards Women'
+                />
+                <Field
+                    className='formElement'
+                    name='requiresApplication'
+                    component={Checkbox}
+                    label='This program requires an applicaion. You can condifgure the application form if this is the case'
+                />
+                {formCustomizationSection}
                 <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Save Program</Button>
             </Form>
         </div>

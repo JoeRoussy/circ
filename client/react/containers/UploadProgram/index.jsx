@@ -5,7 +5,7 @@ import { Container } from 'semantic-ui-react';
 import Authenticated from '../../components/Authenticated';
 import UploadProgramForm from '../../components/UploadProgramForm';
 
-import { submitForm } from '../../../redux/actions/uploadProgramActions';
+import { submitForm, moreQuestions } from '../../../redux/actions/uploadProgramActions';
 
 import constants from '../../../../common/constants';
 
@@ -20,7 +20,10 @@ const UploadProgram = ({
     formData,
     onSubmit,
     isProcessing,
-    errorMessage
+    errorMessage,
+    showFormCustomizationSection,
+    customQuestionsCounter,
+    onMoreQuestions
 }) => {
     return (
         <Authenticated test={user && user.type === ORGANISATION}>
@@ -30,6 +33,9 @@ const UploadProgram = ({
                     onSubmit={onSubmit(formData)}
                     isProcessing={isProcessing}
                     errorMessage={errorMessage}
+                    showFormCustomizationSection={showFormCustomizationSection}
+                    customQuestionsCounter={customQuestionsCounter}
+                    onMoreQuestions={onMoreQuestions}
                 />
             </Container>
         </Authenticated>
@@ -47,17 +53,21 @@ const mapStateToProps = ({
     } = {},
     uploadProgramReducer: {
         isProcessing,
-        errorMessage
+        errorMessage,
+        customQuestionsCounter
     } = {}
 }) => ({
     user,
     formData: values,
     isProcessing,
-    errorMessage
+    errorMessage,
+    showFormCustomizationSection: !!(values && values.requiresApplication),
+    customQuestionsCounter
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: (formData) => () => dispatch(submitForm(formData)),
+    onMoreQuestions: () => dispatch(moreQuestions())
 });
 
 

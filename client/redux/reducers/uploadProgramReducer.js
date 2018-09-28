@@ -1,4 +1,5 @@
 const config = {
+    customQuestionsCounter: []
 };
 
 const uploadProgramReducer = (state = config, actions) => {
@@ -35,6 +36,16 @@ const uploadProgramReducer = (state = config, actions) => {
             };
 
             break;
+        }
+
+        case 'UPLOAD_PROGRAM_MORE_QUESTIONS_CLICKED': {
+            state = {
+                ...state,
+                customQuestionsCounter: [
+                    ...state.customQuestionsCounter,
+                    {}
+                ]
+            }
         }
     }
 
