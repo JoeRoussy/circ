@@ -27,25 +27,23 @@ const UploadProgram = ({
     onMoreQuestions,
     initialValues,
     removeQuestion
-}) => {
-    return (
-        <Authenticated test={user && user.type === ORGANISATION}>
-            <Container className='rootContainer'>
-                <h1>Upload Program</h1>
-                <UploadProgramForm
-                    onSubmit={onSubmit(formData)}
-                    isProcessing={isProcessing}
-                    errorMessage={errorMessage}
-                    showFormCustomizationSection={showFormCustomizationSection}
-                    customQuestionsCounter={customQuestionsCounter}
-                    onMoreQuestions={onMoreQuestions}
-                    initialValues={initialValues}
-                    removeQuestion={removeQuestion(formData)}
-                />
-            </Container>
-        </Authenticated>
-    );
-}
+}) => (
+    <Authenticated test={user && user.type === ORGANISATION}>
+        <Container className='rootContainer'>
+            <h1>Upload Program</h1>
+            <UploadProgramForm
+                onSubmit={onSubmit(formData)}
+                isProcessing={isProcessing}
+                errorMessage={errorMessage}
+                showFormCustomizationSection={showFormCustomizationSection}
+                customQuestionsCounter={customQuestionsCounter}
+                onMoreQuestions={onMoreQuestions}
+                initialValues={initialValues}
+                removeQuestion={removeQuestion(formData)}
+            />
+        </Container>
+    </Authenticated>
+);
 
 const mapStateToProps = ({
     userReducer: {
@@ -72,7 +70,7 @@ const mapStateToProps = ({
         customQuestionName: customQuestionsCounter.map(x => x.name),
         customQuestionRequired:  customQuestionsCounter.map(x => x.isRequired)
     }
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
     onSubmit: (formData) => () => dispatch(submitForm(formData)),
