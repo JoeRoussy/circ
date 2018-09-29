@@ -11,6 +11,10 @@
     font-size: 1.2em;
 }
 
+#uploadProgramForm .formCustomizationWrapper .customQuestionWrapper {
+    margin-bottom: 60px;
+}
+
 #uploadProgramForm .formCustomizationWrapper .customQuestionWrapper .questionCheckbox {
     margin-top: 15px;
 }

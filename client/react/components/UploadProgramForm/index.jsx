@@ -37,7 +37,8 @@ const UploadProgramForm = ({
     errorMessage,
     showFormCustomizationSection,
     customQuestionsCounter,
-    onMoreQuestions
+    onMoreQuestions,
+    removeQuestion
 }) => {
     const formCustomizationSection = showFormCustomizationSection ? (
         <div className='formCustomizationWrapper'>
@@ -67,6 +68,9 @@ const UploadProgramForm = ({
                             component={Checkbox}
                             label='Required'
                         />
+                    </div>
+                    <div className="deleteButtonWrapper">
+                        <Button type='button' color='red' onClick={() => removeQuestion(index)} disabled={customQuestionsCounter.length <= 1}>Remove</Button>
                     </div>
                 </div>
                 

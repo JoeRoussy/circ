@@ -1,10 +1,20 @@
 const config = {
-    customQuestionsCounter: []
+    customQuestionsCounter: [
+        {
+            name: 'Name',
+            isRequired: true
+        },
+        {
+            name: 'Email',
+            isRequired: true
+        }
+    ]
 };
 
 const uploadProgramReducer = (state = config, actions) => {
     const {
-        type
+        type,
+        payload
     } = actions;
 
     switch (type) {
@@ -46,6 +56,21 @@ const uploadProgramReducer = (state = config, actions) => {
                     {}
                 ]
             }
+
+            break;
+        }
+
+        case 'UPLOAD_PROGRAM_REMOVE_QUESTION': {
+            state.customQuestionsCounter.pop();
+
+            state = {
+                ...state,
+                customQuestionsCounter: [
+                    ...state.customQuestionsCounter
+                ]
+            }
+
+            break;
         }
     }
 

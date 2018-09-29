@@ -29,4 +29,8 @@ export const submitForm = (formData) => (dispatch) => {
 
 export const moreQuestions = () => ({
     type: 'UPLOAD_PROGRAM_MORE_QUESTIONS_CLICKED'
+});
+
+export const removeCustomQuestion = () => ({
+    type: 'UPLOAD_PROGRAM_REMOVE_QUESTION' 
 })
