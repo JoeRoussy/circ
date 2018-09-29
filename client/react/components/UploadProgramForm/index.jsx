@@ -44,6 +44,7 @@ const UploadProgramForm = ({
         <div className='formCustomizationWrapper'>
             <h2>Program Application Settings</h2>
             <Field
+                className='applicationDestinationWrapper'
                 name='applicationSubmissionEmail'
                 component={InputField}
                 label='Email To Send Applications To:'
