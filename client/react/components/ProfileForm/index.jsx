@@ -88,15 +88,15 @@ const ProfileForm = ({
                     labelPosition='left'
                     placeholder='Name'
                 />
-            <Button className='primaryColour' type='button' onClick={() => navigateTo('/change-password')}>Change Password</Button>
-            <div id='currentProfilePictureWrapper'>
-                <div className="title">Profile Picutre</div>
-                <Image className='profilePicture' src={`${process.env.ASSETS_ROOT}${profilePictureLink}`} />
-            </div>
-            <div id='profilePictureEditSection'>
-                {profilePictureEditSection}
-            </div>
-            <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Update Profile</Button>
+                <Button className='primaryColour' type='button' onClick={() => navigateTo('/change-password')}>Change Password</Button>
+                <div id='currentProfilePictureWrapper'>
+                    <div className="title">Profile Picutre</div>
+                    <Image className='profilePicture' src={`${process.env.ASSETS_ROOT}${profilePictureLink}`} />
+                </div>
+                <div id='profilePictureEditSection'>
+                    {profilePictureEditSection}
+                </div>
+                <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Update Profile</Button>
             </Form>
         </div>
     )

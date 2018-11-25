@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import { change } from 'redux-form';
 
 import ProfileForm from '../../components/ProfileForm';
 import ProfileDisplay from '../../components/ProfileDisplay';
+import Authenticated from '../../components/Authenticated';
 import {
     submitForm,
     editProfile,
@@ -42,8 +42,6 @@ const Profile = ({
     selectedImage,
     onProfileImageChange
 }) => {
-    const redirectSection = user ? '' : <Redirect to='/sign-in'/>;
-
     // Defualt assignment is so app does not error out when user disappears from state (before the redirect happens)
     const {
         profilePictureLink = ''
@@ -77,11 +75,12 @@ const Profile = ({
     )
 
     return (
-        <Container className='rootContainer'>
-            <h1>Profile</h1>
-            {redirectSection}
-            {bodySection}
-        </Container>
+        <Authenticated test={!!user}>
+            <Container className='rootContainer'>
+                <h1>Profile</h1>
+                {bodySection}
+            </Container>
+        </Authenticated>
     );
 };
 

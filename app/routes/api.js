@@ -4,6 +4,7 @@ import { required } from '../components/custom-utils';
 import usersRouter from './users';
 import verifyRouter from './verify';
 import passwordResetRouter from './passwordReset';
+import programsRouter from './programs';
 
 export default ({
     app = required('app'),
@@ -23,6 +24,11 @@ export default ({
     }));
 
     router.use('/passwordReset', passwordResetRouter({
+        db,
+        baseLogger
+    }));
+
+    router.use('/programs', programsRouter({
         db,
         baseLogger
     }));
