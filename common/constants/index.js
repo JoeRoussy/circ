@@ -29,6 +29,11 @@ const constants = {
         },
         USER: {
             NOT_LOGGED_IN: 'user_error_not_logged_in'
+        },
+        PROGRAM_CREATE: {
+            MISSING_CUSTOM_QUESTION_NAMES: 'program_create_missing_custom_question_names',
+            UNEQUAL_QUESTION_ARRAY_LENGTHS: 'program_create_unequal_question_array_lengths',
+            GENERIC: 'program_create_generic_error'
         }
     },
     VERIFICATION_TYPES: {

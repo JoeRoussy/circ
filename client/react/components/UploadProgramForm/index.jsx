@@ -42,12 +42,13 @@ const UploadProgramForm = ({
 }) => {
     const formCustomizationSection = showFormCustomizationSection ? (
         <div className='formCustomizationWrapper'>
-            <h2>Program Application Settings</h2>
+            <h2>Custom Program Application Form</h2>
+            <p className="customQuestionsInfo">Place any custom fields you need filled out for an application to this program and we will send applications to the email provided below.</p>
             <Field
                 className='applicationDestinationWrapper'
                 name='applicationSubmissionEmail'
                 component={InputField}
-                label='Email To Send Applications To:'
+                label='Email To Recieve Applications:'
                 labelPosition='left'
                 placeholder='Email'
             />
@@ -77,7 +78,7 @@ const UploadProgramForm = ({
                 
             )) }
             <div className='addQuestionButtonWrapper'>
-                <Button type='button' color='green' onClick={onMoreQuestions}>Add another question</Button>
+                <Button type='button' color='green' onClick={onMoreQuestions}>Add another field</Button>
             </div>
         </div>
     ) : '';
@@ -121,7 +122,7 @@ const UploadProgramForm = ({
                     className='formElement'
                     name='requiresApplication'
                     component={Checkbox}
-                    label='This program requires an applicaion. You can condifgure the application form if this is the case'
+                    label='This program requires an applicaion. (You can configure the application form if this is the case)'
                 />
                 {formCustomizationSection}
                 <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Save Program</Button>
