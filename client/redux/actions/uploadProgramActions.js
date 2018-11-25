@@ -44,8 +44,6 @@ export const submitForm = (formData) => (dispatch) => {
         ...formValues
     };
 
-    console.log(transformedFormData);
-
     axios.post(`${process.env.API_ROOT}/api/programs`, transformedFormData)
         .then((res) => {
             toast.success('Your program has been created!');
