@@ -3,6 +3,7 @@ import { wrap as coroutine } from 'co';
 import { required } from '../components/custom-utils';
 import { sendError } from './utils';
 import { insert as insertInDb } from '../components/db/service';
+import { convertToObjectId } from '../components/custom-utils';
 import constants from '../../common/constants';
 
 const {
@@ -67,7 +68,8 @@ export const createProgram = ({
             document: {
                 ...programProps,
                 requiresApplication,
-                customQuestions
+                customQuestions,
+                createdById: convertToObjectId(req.user._id)
             },
             returnInsertedDocument: true
         })
