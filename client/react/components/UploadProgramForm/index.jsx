@@ -43,7 +43,7 @@ const UploadProgramForm = ({
     const formCustomizationSection = showFormCustomizationSection ? (
         <div className='formCustomizationWrapper'>
             <h2>Custom Program Application Form</h2>
-            <p className="customQuestionsInfo">Place any custom fields you need filled out for an application to this program and we will send applications to the email provided below.</p>
+            <p className="customQuestionsInfo">Enter required form fields below for an application to this program and we will send applications to the email provided below.</p>
             <Field
                 className='applicationDestinationWrapper'
                 name='applicationSubmissionEmail'
